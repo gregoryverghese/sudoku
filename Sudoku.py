@@ -28,3 +28,18 @@ def ConvertToSets(problem):
     problem_set = [[{problem[i][j]} if problem[i][j] != 0 else s for j in range(n)] for i in range(n)]
 
     return problem_set
+
+def convertToInts(problem):
+    '''Reads in a 2d nested list of sets and converts
+    each element to a number if the element is
+    a set with a single number or a 0 of the set contains
+    multiple numbers
+    Args:
+        problem: 2d list of sets
+    Returns:
+        A 2d list containing numbers
+        '''
+    n = len(problem)
+    problem_set = [[int(list(problem[i][j])[0]) if len(problem[i][j]) == 1  else 0 for j in range(n)] for i in range(n)]
+
+    return problem_set

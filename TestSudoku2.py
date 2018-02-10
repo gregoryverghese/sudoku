@@ -10,4 +10,11 @@ def test_ConvertToSets2():
         assert(problem_set == test_set)
         assert(isinstance(problem[0][0], int))
         assert(isinstance(problem_set[0][0], set))
-        
+
+def testConvertToInts():
+
+    sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
+    problem_ints = convertToInts(sets)
+    assert([[0, 3, 4], [1, 0, 2], [0, 2, 3]] == problem_ints)
+    assert(isinstance(sets[0][0], set))
+    assert(isinstance(problem_ints[0][0], int))
