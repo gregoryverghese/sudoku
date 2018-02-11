@@ -1,4 +1,20 @@
 
+def getRowLocations(rowNumber):
+    row_locations = [(rowNumber, i) for i in range(9)]
+    return row_locations
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def read_sudoku(file):
@@ -29,7 +45,7 @@ def ConvertToSets(problem):
 
     return problem_set
 
-def convertToInts(problem):
+def ConvertToInts(problem):
     '''Reads in a 2d nested list of sets and converts
     each element to a number if the element is
     a set with a single number or a 0 of the set contains
