@@ -1,4 +1,6 @@
 {
+  "TestSudoku2.py::testGetColumnLocations": true,
   "TestSudoku2.py::test_ConvertToInts": true,
-  "TestSudoku2.py::test_ConvertToSets2": true
+  "TestSudoku2.py::test_ConvertToSets2": true,
+  "TestSudoku2.py::test_GetRowLocations": true
 }

@@ -21,3 +21,13 @@ def test_GetRowLocations():
     lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
     row_locations = getRowLocations(5)
     assert(set(lst) == set(row_locations))
+
+def testGetColumnLocations():
+    lst = [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5)]
+    column_locations = getColumnLocations(5)
+    assert(set(lst), set(getColumnLocations(5)))
+
+def testGetBoxLocations():
+    lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
+    box_locations = getBoxLocations((3, 2))
+    assert(set(lst) == set(box_locations))
