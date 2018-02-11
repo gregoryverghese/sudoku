@@ -31,3 +31,12 @@ def testGetBoxLocations():
     lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
     box_locations = getBoxLocations((3, 2))
     assert(set(lst) == set(box_locations))
+
+def testEliminate(self):
+    sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
+    location = (1, 2) # contains {2}
+    count = eliminate(sets, location, [(0, 0), (1, 0), (2, 2)])
+    assert(count == 2)
+    assert([[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]] == sets)
+    count = eliminate(sets, location, [(0, 0), (1, 0), (2, 2), (1, 2)])
+    assert(count == 2)
