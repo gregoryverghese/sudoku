@@ -74,7 +74,7 @@ def getRowLocations(rowNumber):
     return row_locations
 
 
-def getColumnLocations(rowNumber):
+def getColumnLocations(columnNumber):
     '''Given a column number returns a list of tuples containing
     all 9 possible locations.
     Args:
