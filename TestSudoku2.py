@@ -41,3 +41,11 @@ def testEliminate():
     sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
     count = eliminate(sets, location, [(0, 0), (1, 0), (2, 2), (1, 2)])
     assert(count == 3)
+
+def testIsSolved():
+        
+        array = [[{1}] * 9] * 9
+        assert((all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])) == True)
+        array[3][5] = {1, 2}
+        assert((all([len(array[r][c]) == 1 for r in range(0, 9)
+                                                        for c in range(0, 9)])) == False)
