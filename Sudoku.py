@@ -1,3 +1,18 @@
+def eliminate(problem, location, listOfLocations):
+    count = 0
+    number = list(problem[location[0]][location[1]])[0]
+    for loc in listOfLocations:
+            num_set = problem[loc[0]][loc[1]]
+            if number in num_set:
+                count += 1
+
+                num_set.remove(number)
+                problem[loc[0]][loc[1]] = num_set
+
+    print(problem)
+    return count
+
+
 def getBoxLocations(location):
     '''Given a location this determines which box of the grid the location
     resides in and returns all other locations in that box within a list
