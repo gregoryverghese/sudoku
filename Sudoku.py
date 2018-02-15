@@ -1,15 +1,35 @@
+def isSolved(problem):
+    '''given a 2d array this checks to see if each element is a set of a
+    single number and returns true if it is false otherwise
+    Args:
+        problem: nested list of sets
+    Returns:
+        boolean value if the array contains sets of single numbers, false otherwise
+    '''
+    n = len(problem)
+    return (all([len(problem[i][j]) == 1 for j in range(n) for i in range(n)]))
+
 def eliminate(problem, location, listOfLocations):
+    ''''Given a 2d array (nested list), a location within the array and and list of
+    other locations remove, the number which resides at location if it exists in the
+    sets at the other locations, changing the array accordingly and returning the
+    number of times it was removed
+    Args:
+        problem: nested list of sets
+        location: tuple of 2 ints containg locatation of a single sized set in problem
+        listOfLocations: list of tuples containing locations in problem
+    Returns:
+        count: number of times the number in the set at location was removed from other sets
+        that exists at locations listed in listOfLocations
+    '''
     count = 0
     number = list(problem[location[0]][location[1]])[0]
     for loc in listOfLocations:
             num_set = problem[loc[0]][loc[1]]
             if number in num_set:
                 count += 1
-
                 num_set.remove(number)
                 problem[loc[0]][loc[1]] = num_set
-
-    print(problem)
     return count
 
 
