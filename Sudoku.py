@@ -1,3 +1,16 @@
+def solve(problem):
+
+    n = len(problem)
+
+    number_locations = [(i, j) for j in range(n) for i in range(n)  if len(problem[i][j]) ==  1]
+
+    print (number_locations)
+    print(len(number_locations))
+    return(nud)
+
+
+
+
 def isSolved(problem):
     '''given a 2d array this checks to see if each element is a set of a
     single number and returns true if it is false otherwise
@@ -101,7 +114,7 @@ def read_sudoku(file):
     stream.close()
     return eval("".join(data))
 
-def ConvertToSets(problem):
+def convertToSets(problem):
     '''Reads in a 2d nested list of numbers and converts
     each element to  a set of range(n) if the element is
     a 0 or a set of the number if it's not 0
@@ -117,7 +130,7 @@ def ConvertToSets(problem):
 
     return problem_set
 
-def ConvertToInts(problem):
+def convertToInts(problem):
     '''Reads in a 2d nested list of sets and converts
     each element to a number if the element is
     a set with a single number or a 0 of the set contains

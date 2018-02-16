@@ -1,3 +1,11 @@
 {
-  "TestSudoku2.py::testGetColumnLocations": true
+  "TestSudoku2.py::testGetColumnLocations": true,
+  "TestSudoku2.py::test_ConvertToInts": true,
+  "TestSudoku2.py::test_ConvertToSets2": true,
+  "TestSudoku2.py::test_Eliminate": true,
+  "TestSudoku2.py::test_GetBoxLocations": true,
+  "TestSudoku2.py::test_GetColumnLocations": true,
+  "TestSudoku2.py::test_GetRowLocations": true,
+  "TestSudoku2.py::test_IsSolved": true,
+  "TestSudoku2.py::test_Solve": true
 }
