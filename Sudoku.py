@@ -3,10 +3,19 @@ def solve(problem):
     n = len(problem)
 
     number_locations = [(i, j) for j in range(n) for i in range(n)  if len(problem[i][j]) ==  1]
+    print(problem)
+    for i in range(len(number_locations)):
 
-    print (number_locations)
-    print(len(number_locations))
-    return(nud)
+        row_location = getRowLocations(number_locations[i][0])
+        column_locations = getColumnLocations(number_locations[i][1])
+        box_locations = getBoxLocations(number_locations[i])
+
+
+        eliminate(problem, number_locations[i], row_location)
+
+
+    #print(problem)
+    return(None)
 
 
 
@@ -61,7 +70,7 @@ def getBoxLocations(location):
         if location[0] in range(val[0], val[1] + 1):
             row_upper = val[1]
             row_lower = val[0]
-
+    #for val
     for val in Grid_dict.values():
         if location[1] in range(val[0], val[1] + 1):
             column_upper = val[1]
@@ -80,7 +89,7 @@ def getRowLocations(rowNumber):
     Returns:
         a list contaning tuples of all possible locations
         for example if rowNumber is 3 this would returns
-        [(3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8)]
+        [(3, 0), (3, 1), (3, 2), (3, 3),     (3, 4), (3, 5), (3, 6), (3, 7), (3, 8)]
     '''
 
     row_locations = [(rowNumber, i) for i in range(9)]
@@ -98,7 +107,7 @@ def getColumnLocations(columnNumber):
         [(0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3)]
     '''
 
-    column_locations = [(columnNumber, i) for i in range(9)]
+    column_locations = [(i, columnNumber) for i in range(9)]
     return column_locations
 
 
@@ -124,7 +133,7 @@ def convertToSets(problem):
         A 2d list containing sets
     '''
     n = len(problem)
-    s = set(range(1, (n * n) + 1))
+    s = set(range(1, (n) + 1))
 
     problem_set = [[{problem[i][j]} if problem[i][j] != 0 else s for j in range(n)] for i in range(n)]
 
