@@ -52,10 +52,11 @@ def test_IsSolved():
         array[3][5] = {1, 2}
         assert isSolved(array) == False
 
-def test_getSingleLocations(problem):
+def test_getSingleLocations(problem, n):
 
     sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
-    single_locations = getSingleLocations(sets)
+    n = len(sets)
+    single_locations = getSingleLocations(sets, n)
     single_sets = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 1)]
     assert all(len(sets[single_locations[i][0]][single_locations[i][1]] == 1 for i in
                                                                 range(len(single_locations))
