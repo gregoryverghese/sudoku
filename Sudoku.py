@@ -1,24 +1,49 @@
-def solve(problem):
+from functools import reduce
 
+def main():
+
+    name = input()
+    test = read_sudoku(name)
+    print(test)
+
+
+
+
+
+
+
+
+
+
+
+
+def print_sudoku(problem):
+
+    for i, num in enumerate(problem):
+
+        print(("|" + "{} {} {} |" * 3).format(*[x for x in num]))
+        if i %  3 == 2:
+            print("-" * 22)
+        else:
+            pass
+
+    return 0
+
+def solve(problem):
     n = len(problem)
 
-    number_locations = [(i, j) for j in range(n) for i in range(n)  if len(problem[i][j]) ==  1]
-    print(problem)
-    for i in range(len(number_locations)):
+    for k in range(10):
+        for i in range(n):
+            for j in range(n):
 
-        row_location = getRowLocations(number_locations[i][0])
-        column_locations = getColumnLocations(number_locations[i][1])
-        box_locations = getBoxLocations(number_locations[i])
+                indexArgs = [i, j, (i, j)]
+                getLocations = [getRowLocations, getColumnLocations, getBoxLocations]
 
+                locations = list(map(lambda x, y: x(y), getLocations, indexArgs))
+                all_locations = [l for loc in locations for l in loc]
+                count = eliminate(problem, (i, j), all_locations)
 
-        eliminate(problem, number_locations[i], row_location)
-
-
-    #print(problem)
-    return(None)
-
-
-
+    return(problem)
 
 def isSolved(problem):
     '''given a 2d array this checks to see if each element is a set of a
@@ -45,13 +70,20 @@ def eliminate(problem, location, listOfLocations):
         that exists at locations listed in listOfLocations
     '''
     count = 0
-    number = list(problem[location[0]][location[1]])[0]
-    for loc in listOfLocations:
+
+    if len(problem[location[0]][location[1]]) != 1:
+        return 0
+
+    else:
+        number = list(problem[location[0]][location[1]])[0]
+        for loc in listOfLocations:
             num_set = problem[loc[0]][loc[1]]
-            if number in num_set:
+            if number in num_set and loc!= location:
+                #if len(num_set) != 1:
                 count += 1
                 num_set.remove(number)
                 problem[loc[0]][loc[1]] = num_set
+    print(count)
     return count
 
 
@@ -91,6 +123,7 @@ def getRowLocations(rowNumber):
         for example if rowNumber is 3 this would returns
         [(3, 0), (3, 1), (3, 2), (3, 3),     (3, 4), (3, 5), (3, 6), (3, 7), (3, 8)]
     '''
+    Grid_dict = {"box1": (0, 2), "box2": (3, 5), "box3": (6, 8)}
 
     row_locations = [(rowNumber, i) for i in range(9)]
     return row_locations
@@ -135,7 +168,7 @@ def convertToSets(problem):
     n = len(problem)
     s = set(range(1, (n) + 1))
 
-    problem_set = [[{problem[i][j]} if problem[i][j] != 0 else s for j in range(n)] for i in range(n)]
+    problem_set = [[{problem[i][j]} if problem[i][j] != 0 else {1, 2, 3, 4, 5, 6, 7, 8, 9} for j in range(n)] for i in range(n)]
 
     return problem_set
 
@@ -150,6 +183,10 @@ def convertToInts(problem):
         A 2d list containing numbers
         '''
     n = len(problem)
-    problem_set = [[int(list(problem[i][j])[0]) if len(problem[i][j]) == 1  else 0 for j in range(n)] for i in range(n)]
+    problem_set = [[int(list(problem[i][j])[0]) if len(problem[i][j]) == 1
+                                                             else 0 for j in range(n)] for i in range(n)]
 
     return problem_set
+
+if __name__ == '__main__':
+    main()
