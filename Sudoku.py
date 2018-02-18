@@ -1,10 +1,40 @@
 from functools import reduce
 
+
+
+def getIncompleteLocations(problem):
+
+    n = len(problem)
+    locations = [((i, j), num) for i in range(n) for j, num in enumerate(problem[i])]
+    locations = list(filter(lambda x: (len(x[1]) != 1), locations))
+
+    return locations
+
+
+def playAgain(response, prompt):
+
+    while response not in ['Y', 'y', 'N', 'n']:
+        response = input('Sorry I do not recognize your answer \n' + prompt)
+
+    return response
+
+
 def main():
 
-    name = input()
-    test = read_sudoku(name)
-    print(test)
+    while play in {'Y', 'y'}:
+        name = input('Could you you please provide the file name? \n')
+        sudoku_grid = read_sudoku(name)
+        print_sudoku(sudoku_grid)
+        problemAsSets = convertToSets(sudoku_grid)
+        result = solve(problemAsSets)
+        solved = convertToInts(problemAsSets)
+        print_sudoku(solved)
+        incomplete_locations = getIncompleteLocations if not result else None
+        prompt = 'Would you like to play again?'
+        response = input(prompt + 'please answer Y or y for Yes or N or n for No \n')
+        play = playAgain(response, prompt)
+
+        print('Thankyou for playing Sudoku')
 
 
 def print_sudoku(problem):
@@ -20,25 +50,26 @@ def print_sudoku(problem):
     return 0
 
 
-def getLocation():
+def getLocation(indexArgs):
 
     getLoc_func = [getRowLocations, getColumnLocations, getBoxLocations]
-    location_lst = (map(lambda x, y: x(y), getLocations, indexArgs))
+    location_lst = (map(lambda x, y: x(y), getLoc_func, indexArgs))
     all_locations = [l for loc in location_lst  for l in loc]
 
     return all_locations
 
 def solve(problem):
+
     n = len(problem)
 
     for k in range(10):
         for i in range(n):
-            for j in range(n):
-
-                indexArgs = [i, j, (i, j)]
-                count = eliminate(problem, (i, j), all_locations)
+                for j in range(n):
+                    loc2 = getLocation([i, j, (i, j)])
+                    count =  (eliminate(problem, (i, j), loc2))
 
     return(problem)
+
 
 def isSolved(problem):
     '''given a 2d array this checks to see if each element is a set of a
@@ -50,6 +81,7 @@ def isSolved(problem):
     '''
     n = len(problem)
     return (all([len(problem[i][j]) == 1 for j in range(n) for i in range(n)]))
+
 
 def eliminate(problem, location, listOfLocations):
     ''''Given a 2d array (nested list), a location within the array and and list of
@@ -78,7 +110,7 @@ def eliminate(problem, location, listOfLocations):
                 count += 1
                 num_set.remove(number)
                 problem[loc[0]][loc[1]] = num_set
-    print(count)
+
     return count
 
 

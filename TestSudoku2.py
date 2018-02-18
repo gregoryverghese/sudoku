@@ -1,18 +1,26 @@
 import copy
 from Sudoku import *
 
-def test_main():
 
-    main1()
+#def test_play():
 
-    assert 0 == 1
+#response = 'Y'
+#play = playAgain(response)
+#assert play in ['Y', 'y', 'N', 'n']:
 
-def test_getLocations():
 
-    problem = [[0, 4, 5], [0, 6, 0], [2, 0, 9]]
+def test_getIncompleteLocations():
+
+    problem = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
+    incomplete = getIncompleteLocations(problem)
+    assert incomplete == [[(0,0), {1, 2}], [(1, 1), {3, 5, 7}], [(2, 1), {2, 3}]]
+
+
+def test_getLocation():
+
     indexArgs = [1, 1, (1, 2)]
-    location_lst = getLocations(problem, indexArgs)
-    assert isinstance(location_lst,list)
+    location_lst = getLocation(indexArgs)
+    assert isinstance(location_lst, int)
 
 
 def test_ConvertToSets2():
@@ -188,7 +196,7 @@ def test_Solve():
                [0, 0, 0,  2, 8, 0,  0, 0, 0],
                [0, 0, 0,  6, 0, 0,  0, 0, 3]]
 
-               #solution = tryToSolve(sudoku1, solved1)
+    solution = tryToSolve(sudoku1, solved1)
     problemAssets = convertToSets(sudoku1)
     test = solve(problemAssets)
 
