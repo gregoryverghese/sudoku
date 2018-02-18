@@ -1,10 +1,25 @@
+'''Name: Gregory Verghese'''
+'''Username: gregoryverghese'''
+'''Email: gvergh01@dcs.bbk.ac.uk'''
+
+'''This is a sudoku solver. You can feed in a 9x9 grid of sudoku and this program
+will try to solve it. It will print out the resultant grid and if it is not solved
+the locations and numbers that are left/
+'''
+
 from functools import reduce
 
 
-
 def getIncompleteLocations(problem):
-
-    n = len(problem)
+    '''given a 2d array of sets this checks to see if each element contains more
+    than one number in the set and returns the location and numbers in that set
+    Args:
+        problem: nested list of sets
+    Returns:
+        locations: A list of tuples with the first element containing the location
+        and the second a list of the numbers
+    '''
+    n =  len(problem)
     locations = [((i, j), num) for i in range(n) for j, num in enumerate(problem[i])]
     locations = list(filter(lambda x: (len(x[1]) != 1), locations))
 
@@ -12,6 +27,13 @@ def getIncompleteLocations(problem):
 
 
 def playAgain(response, prompt):
+    '''checks to see if the a valid response has been provided by the user
+    Args:
+        response: sting containing the users repsponse from standard input()
+        prompt: string asking user if they want to play again
+    Returns:
+        response: An acceptable response indicating yes or no
+    '''
 
     while response not in ['Y', 'y', 'N', 'n']:
         response = input('Sorry I do not recognize your answer \n' + prompt)
@@ -20,7 +42,10 @@ def playAgain(response, prompt):
 
 
 def main():
-
+    '''Asks the user for a sudoku grid, tries to solve it, prints out the resultant grid
+    and if it has not been solved prints out a list of locations and remaining numbers.
+    Asks the user if they would like to play again.
+    '''
     play = 'Y'
     while play in {'Y', 'y'}:
         name = input('Could you you please provide the file name? \n')
@@ -44,21 +69,31 @@ def main():
 
 
 def print_sudoku(problem):
+    '''prints the final sudoku grid format
+    Args:
+        problem: Array of integer values
+    '''
 
     print('\n The final solution\n' + ("-" * 22))
 
     for i, num in enumerate(problem):
         print(("|" + "{} {} {} |" * 3).format(*[x for x in num]))
 
-        #if i %  3 == 2:
-            #print("-" * 22)
-        #else:
+        if i %  3 == 2:
+            print("-" * 22)
+        else:
+            pass
 
-
-    return 0
 
 
 def getLocation(indexArgs):
+    '''prints the final sudoku grid format
+    Args:
+        indexArgs: List containing row index, column index and tuple with row and column index
+    Returns:
+        all_locations: Contains a list of all the locations that are in the same row, column or
+        box as the location (i, j) provided
+    '''
 
     getLoc_func = [getRowLocations, getColumnLocations, getBoxLocations]
     location_lst = (map(lambda x, y: x(y), getLoc_func, indexArgs))
@@ -67,6 +102,14 @@ def getLocation(indexArgs):
     return all_locations
 
 def solve(problem):
+    '''given a sudoku problem, tries to call it by looping through all locations
+    and passing the sets of values to the eliminate funcion
+    Args:
+        problem: array of sets
+    Returns:
+        result: Boolean value if the sudoku grid has ben solved false otherwise
+        box as the location (i, j) provided
+    '''
 
     n = len(problem)
 
@@ -78,7 +121,7 @@ def solve(problem):
 
     result = isSolved(problem)
 
-    return(result)
+    return result
 
 
 def isSolved(problem):
@@ -132,21 +175,14 @@ def getBoxLocations(location):
     Returns:
         List containing tuples of all the locations within the box
     '''
-
     Grid_dict = {"box1": (0, 2), "box2": (3, 5), "box3": (6, 8)}
 
-    for val in Grid_dict.values():
-        if location[0] in range(val[0], val[1] + 1):
-            row_upper = val[1]
-            row_lower = val[0]
-    #for val
-    for val in Grid_dict.values():
-        if location[1] in range(val[0], val[1] + 1):
-            column_upper = val[1]
-            column_lower = val[0]
+    row_boundaries  = [(val[1], val[0]) for val in Grid_dict.values() if location[0] in range(val[0], val[1] + 1)]
 
-    box_locations = [(i, j) for j in range(column_lower, column_upper + 1) for i in range(row_lower, row_upper + 1)]
+    col_boundaries  = [(val[1], val[0]) for val in Grid_dict.values() if location[1] in range(val[0], val[1] + 1)]
 
+    box_locations = [(i, j) for j in range(col_boundaries[0][1], col_boundaries[0][0] + 1)
+                                                                    for i in range(row_boundaries[0][1], row_boundaries[0][0] + 1)]
     return box_locations
 
 
@@ -203,9 +239,8 @@ def convertToSets(problem):
         A 2d list containing sets
     '''
     n = len(problem)
-    s = set(range(1, (n) + 1))
 
-    problem_set = [[{problem[i][j]} if problem[i][j] != 0 else {1, 2, 3, 4, 5, 6, 7, 8, 9} for j in range(n)] for i in range(n)]
+    problem_set = [[{problem[i][j]} if problem[i][j] != 0 else set(range(1, (n) + 1)) for j in range(n)] for i in range(n)]
 
     return problem_set
 
@@ -221,7 +256,7 @@ def convertToInts(problem):
         '''
     n = len(problem)
     problem_set = [[int(list(problem[i][j])[0]) if len(problem[i][j]) == 1
-                                                             else 0 for j in range(n)] for i in range(n)]
+                                                             else '.' for j in range(n)] for i in range(n)]
 
     return problem_set
 

@@ -54,8 +54,7 @@ def test_GetColumnLocations():
 def test_GetBoxLocations():
     lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
     box_locations = getBoxLocations((3, 2))
-
-    assert set == set(box_locations)
+    assert set(lst) == set(box_locations)
 
 def test_Eliminate():
     sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
