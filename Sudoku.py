@@ -29,19 +29,17 @@ def main():
         result = solve(problemAsSets)
         solved = convertToInts(problemAsSets)
         print_sudoku(solved)
-        incomplete_locations = getIncompleteLocations(results) if result else None
+        incomplete_locations = getIncompleteLocations(problemAsSets) if not result else None
+        if not result:
+            for i in range(len(incomplete_locations)):
+                print('{}. location: {} numbers {}'.format(i, incomplete_locations[i][0], list(incomplete_locations[i][1])))
 
-        for i in range(len(incomplete_locations)):
-            print('{}. location: {} numbers {}').format(i, incomplete_locations[i][0],
-                                                                        list(incomplete_locations[i][1]))
+        prompt = 'Would you like to play again? \n'
+        response = input(prompt + 'please answer Y/y for Yes or N/n for No \n')
 
-
-
-        prompt = 'Would you like to play again?'
-        response = input(prompt + 'please answer Y or y for Yes or N or n for No \n')
         play = playAgain(response, prompt)
 
-        print('Thankyou for playing Sudoku')
+    print('Thankyou for playing Sudoku')
 
 
 def print_sudoku(problem):
@@ -75,7 +73,9 @@ def solve(problem):
                     loc2 = getLocation([i, j, (i, j)])
                     count =  (eliminate(problem, (i, j), loc2))
 
-    return(problem)
+    result = isSolved(problem)
+
+    return(result)
 
 
 def isSolved(problem):
