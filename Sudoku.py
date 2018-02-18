@@ -20,6 +20,7 @@ def playAgain(response, prompt):
 
 
 def main():
+
     play = 'Y'
     while play in {'Y', 'y'}:
         name = input('Could you you please provide the file name? \n')
@@ -44,13 +45,15 @@ def main():
 
 def print_sudoku(problem):
 
-    for i, num in enumerate(problem):
+    print('\n The final solution\n' + ("-" * 22))
 
+    for i, num in enumerate(problem):
         print(("|" + "{} {} {} |" * 3).format(*[x for x in num]))
-        if i %  3 == 2:
-            print("-" * 22)
-        else:
-            pass
+
+        #if i %  3 == 2:
+            #print("-" * 22)
+        #else:
+
 
     return 0
 
