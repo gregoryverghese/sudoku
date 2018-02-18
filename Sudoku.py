@@ -20,7 +20,7 @@ def playAgain(response, prompt):
 
 
 def main():
-
+    play = 'Y'
     while play in {'Y', 'y'}:
         name = input('Could you you please provide the file name? \n')
         sudoku_grid = read_sudoku(name)
@@ -29,7 +29,14 @@ def main():
         result = solve(problemAsSets)
         solved = convertToInts(problemAsSets)
         print_sudoku(solved)
-        incomplete_locations = getIncompleteLocations if not result else None
+        incomplete_locations = getIncompleteLocations(results) if result else None
+
+        for i in range(len(incomplete_locations)):
+            print('{}. location: {} numbers {}').format(i, incomplete_locations[i][0],
+                                                                        list(incomplete_locations[i][1]))
+
+
+
         prompt = 'Would you like to play again?'
         response = input(prompt + 'please answer Y or y for Yes or N or n for No \n')
         play = playAgain(response, prompt)
