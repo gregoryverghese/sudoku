@@ -8,7 +8,6 @@
   "TestSudoku2.py::test_GetColumnLocations": true,
   "TestSudoku2.py::test_GetRowLocations": true,
   "TestSudoku2.py::test_IsSolved": true,
-  "TestSudoku2.py::test_Solve": true,
   "TestSudoku2.py::test_getIncompleteLocations": true,
   "TestSudoku2.py::test_getLocation": true,
   "TestSudoku2.py::test_getLocations": true,

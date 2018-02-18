@@ -196,22 +196,28 @@ def test_Solve():
                [0, 0, 0,  2, 8, 0,  0, 0, 0],
                [0, 0, 0,  6, 0, 0,  0, 0, 3]]
 
-    solution = tryToSolve(sudoku1, solved1)
-    problemAssets = convertToSets(sudoku1)
-    test = solve(problemAssets)
 
-    solved = convertToInts(test)
+    problemAssets = convertToSets(sudoku1)
+    solve(problemAssets)
+    solved = convertToInts(problemAssets)
     print_sudoku(solved)
-    assert(0 == solved)
+    assert(solved == solved1)
+
+    problemAssets = convertToSets(sudoku2)
+    solve(problemAssets)
+    solved = convertToInts(problemAssets)
+    print_sudoku(solved)
+    assert(solved == solved2)
+
+    problemAssets = convertToSets(sudoku3)
+    solve(problemAssets)
+    solved = convertToInts(problemAssets)
+    print_sudoku(solved)
+    assert(solved == solved3)
+
+
+
+
 
     #solution = tryToSolv(sudoku2, solved2)
     #solution = tryToSolve(sudoku3, solved3)
-
-
-def tryToSolve(problem, solution):
-##        print_sudoku(problem)
-    problemAsSets = convertToSets(problem)
-    solve(problemAsSets)
-    solved = convertToInts(problemAsSets)
-    return solved
-##        print_sudoku(solution)
