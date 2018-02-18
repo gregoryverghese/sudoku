@@ -8,15 +8,6 @@ def main():
 
 
 
-
-
-
-
-
-
-
-
-
 def print_sudoku(problem):
 
     for i, num in enumerate(problem):
@@ -29,6 +20,8 @@ def print_sudoku(problem):
 
     return 0
 
+
+
 def solve(problem):
     n = len(problem)
 
@@ -39,8 +32,11 @@ def solve(problem):
                 indexArgs = [i, j, (i, j)]
                 getLocations = [getRowLocations, getColumnLocations, getBoxLocations]
 
-                locations = list(map(lambda x, y: x(y), getLocations, indexArgs))
-                all_locations = [l for loc in locations for l in loc]
+                #locations = list(map(lambda x, y: x(y), getLocations, indexArgs))
+                all_locations = [l for loc in list(map(lambda x, y: x(y), getLocations, indexArgs)) for l in loc]
+
+                
+
                 count = eliminate(problem, (i, j), all_locations)
 
     return(problem)

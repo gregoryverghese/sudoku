@@ -7,10 +7,12 @@ def test_main():
 
     assert 0 == 1
 
+def test_getLocations():
 
-
-
-
+    problem = [[0, 4, 5], [0, 6, 0], [2, 0, 9]]
+    indexArgs = [1, 1, (1, 2)]
+    location_lst = getLocations(problem, indexArgs)
+    assert isinstance(location_lst,list)
 
 
 def test_ConvertToSets2():
