@@ -13,20 +13,20 @@ def test_getIncompleteLocations():
 
     problem = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
     incomplete = getIncompleteLocations(problem)
-    assert incomplete == [[(0,0), {1, 2}], [(1, 1), {3, 5, 7}], [(2, 1), {2, 3}]]
+    assert incomplete == [((0,0), {1, 2}), ((1, 1), {3, 5, 7}), ((2, 0), {2, 3})]
 
 
 def test_getLocation():
 
     indexArgs = [1, 1, (1, 2)]
     location_lst = getLocation(indexArgs)
-    assert isinstance(location_lst, int)
+    assert isinstance(location_lst, list)
 
 
 def test_ConvertToSets2():
-    problem = [[0, 4, 5], [0, 6, 0], [2, 0, 9]]
-    s = set(range(1, 10))
-    test_set = [[s, {4}, {5}], [s, {6}, s], [{2}, s, {9}]]
+    problem = [[0, 1, 1], [0, 2, 0], [2, 0, 2]]
+    s = set(range(1, 4))
+    test_set = [[s, {1}, {1}], [s, {2}, s], [{2}, s, {2}]]
     problem_set = convertToSets(problem)
     assert problem_set == test_set
     assert isinstance(problem[0][0], int)
@@ -35,9 +35,9 @@ def test_ConvertToSets2():
 def test_ConvertToInts():
     sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
     problem_ints = convertToInts(sets)
-    assert [[0, 3, 4], [1, 0, 2], [0, 2, 3]] == problem_ints
+    assert [['.', 3, 4], [1, '.', 2], ['.', 2, 3]] == problem_ints
     assert isinstance(sets[0][0], set)
-    assert isinstance(problem_ints[0][0], int)
+    assert isinstance(problem_ints[0][1], int)
 
 def test_GetRowLocations():
     lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
@@ -103,22 +103,6 @@ def test_getSingleLocations(problem, n):
                                                                 range(len(single_locations)))
     assert set(single_sets) == set(single_locations)
 
-def test_print_sudoku():
-
-        problem = [[4, 6, 8,  5, 1, 3,  2, 7, 9],
-                   [2, 3, 1,  7, 4, 9,  5, 6, 8],
-                   [5, 7, 9,  6, 2, 8,  4, 1, 3],
-
-                   [6, 1, 7,  9, 8, 2,  3, 5, 4],
-                   [8, 2, 3,  1, 5, 4,  7, 9, 6],
-                   [9, 5, 4,  3, 7, 6,  1, 8, 2],
-
-                   [7, 9, 2,  8, 3, 5,  6, 4, 1],
-                   [3, 8, 5,  4, 6, 1,  9, 2, 7],
-                   [1, 4, 6,  2, 9, 7,  8, 3, 5]]
-
-        test = print_sudoku(problem)
-        assert 1 == test
 
 def test_Solve():
     # Easy
@@ -183,17 +167,17 @@ def test_Solve():
                [0, 0, 0,  2, 8, 0,  0, 0, 0],
                [0, 0, 0,  6, 0, 0,  0, 0, 3]]
 
-    solved3 = [[9, 0, 0,  0, 0, 8,  0, 0, 0],
-               [0, 0, 0,  0, 3, 2,  0, 0, 0],
-               [6, 8, 0,  9, 0, 1,  0, 7, 2],
+    solved3 = [[9, '.', '.',  '.', '.', 8,  '.', '.', '.'],
+               ['.', '.', '.',  '.', 3, 2,  '.', '.', '.'],
+               [6, 8, '.',  9, '.', 1,  '.', 7, 2],
 
-               [8, 0, 9,  5, 2, 0,  0, 3, 0],
-               [2, 0, 0,  0, 0, 0,  0, 0, 5],
+               [8, '.', 9,  5, 2, '.',  '.', 3, '.'],
+               [2, '.', '.',  '.', '.', '.',  '.', '.', 5],
                [5, 4, 6,  1, 9, 3,  7, 2, 8],
 
-               [0, 2, 0,  3, 0, 9,  0, 6, 4],
-               [0, 0, 0,  2, 8, 0,  0, 0, 0],
-               [0, 0, 0,  6, 0, 0,  0, 0, 3]]
+               ['.', 2, '.',  3, '.', 9,  '.', 6, 4],
+               ['.', '.', '.',  2, 8, '.',  '.', '.', '.'],
+               ['.', '.', '.',  6, '.', '.',  '.', '.', 3]]
 
 
     problemAssets = convertToSets(sudoku1)

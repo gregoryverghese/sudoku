@@ -1,8 +1,6 @@
 {
   "TestSudoku.py": true,
   "TestSudoku2.py::testGetColumnLocations": true,
-  "TestSudoku2.py::test_getIncompleteLocations": true,
-  "TestSudoku2.py::test_getLocation": true,
   "TestSudoku2.py::test_getLocations": true,
   "TestSudoku2.py::test_getSingleLocations": true,
   "TestSudoku2.py::test_main": true,

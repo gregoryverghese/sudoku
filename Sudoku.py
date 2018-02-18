@@ -57,15 +57,18 @@ def main():
         print_sudoku(solved)
         incomplete_locations = getIncompleteLocations(problemAsSets) if not result else None
         if not result:
+            print('The following are the unsolved locations with corresponding potential numbers\n')
             for i in range(len(incomplete_locations)):
+
                 print('{}. location: {} numbers {}'.format(i, incomplete_locations[i][0], list(incomplete_locations[i][1])))
+            print()
 
         prompt = 'Would you like to play again? \n'
         response = input(prompt + 'please answer Y/y for Yes or N/n for No \n')
 
         play = playAgain(response, prompt)
 
-    print('Thankyou for playing Sudoku')
+    print('Thank you for playing Sudoku')
 
 
 def print_sudoku(problem):
@@ -74,7 +77,7 @@ def print_sudoku(problem):
         problem: Array of integer values
     '''
 
-    print('\n The final solution\n' + ("-" * 22))
+    print('\n The Sudoku grid\n' + ("-" * 22))
 
     for i, num in enumerate(problem):
         print(("|" + "{} {} {} |" * 3).format(*[x for x in num]))
@@ -113,7 +116,7 @@ def solve(problem):
 
     n = len(problem)
 
-    for k in range(10):
+    for k in range(20):
         for i in range(n):
                 for j in range(n):
                     loc2 = getLocation([i, j, (i, j)])
@@ -239,7 +242,6 @@ def convertToSets(problem):
         A 2d list containing sets
     '''
     n = len(problem)
-
     problem_set = [[{problem[i][j]} if problem[i][j] != 0 else set(range(1, (n) + 1)) for j in range(n)] for i in range(n)]
 
     return problem_set
