@@ -1,10 +1,3 @@
-Purposes of this assignment:
-============================
-
--   To give you experience with sets.
--   To get you started with "arrays" (lists, and lists of lists) and nested loops.
--   To enforce the idea of unit testing.
-
 General idea of the assignment:
 ===============================
 
