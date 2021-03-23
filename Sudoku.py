@@ -1,6 +1,6 @@
 '''Name: Gregory Verghese'''
 '''Username: gregoryverghese'''
-'''Email: gvergh01@dcs.bbk.ac.uk'''
+'''Email: gregory.verghese@gmail.com'''
 
 '''This is a sudoku solver. You can feed in a 9x9 grid of sudoku and this program
 will try to solve it. It will print out the resultant grid and if it is not solved
@@ -118,9 +118,9 @@ def solve(problem):
 
     for k in range(20):
         for i in range(n):
-                for j in range(n):
-                    loc2 = getLocation([i, j, (i, j)])
-                    count =  (eliminate(problem, (i, j), loc2))
+            for j in range(n):
+                loc2 = getLocation([i, j, (i, j)])
+                count =  (eliminate(problem, (i, j), loc2))
 
     result = isSolved(problem)
 
@@ -180,12 +180,15 @@ def getBoxLocations(location):
     '''
     Grid_dict = {"box1": (0, 2), "box2": (3, 5), "box3": (6, 8)}
 
-    row_boundaries  = [(val[1], val[0]) for val in Grid_dict.values() if location[0] in range(val[0], val[1] + 1)]
+    row_boundaries  = [(val[1], val[0]) for val in Grid_dict.values() 
+                       if location[0] in range(val[0], val[1] + 1)]
 
-    col_boundaries  = [(val[1], val[0]) for val in Grid_dict.values() if location[1] in range(val[0], val[1] + 1)]
+    col_boundaries  = [(val[1], val[0]) for val in Grid_dict.values() 
+                       if location[1] in range(val[0], val[1] + 1)]
 
     box_locations = [(i, j) for j in range(col_boundaries[0][1], col_boundaries[0][0] + 1)
-                                                                    for i in range(row_boundaries[0][1], row_boundaries[0][0] + 1)]
+                    for i in range(row_boundaries[0][1], row_boundaries[0][0] + 1)]
+
     return box_locations
 
 
@@ -242,7 +245,8 @@ def convertToSets(problem):
         A 2d list containing sets
     '''
     n = len(problem)
-    problem_set = [[{problem[i][j]} if problem[i][j] != 0 else set(range(1, (n) + 1)) for j in range(n)] for i in range(n)]
+    problem_set = [[{problem[i][j]} if problem[i][j] != 0 else set(range(1, (n) + 1)) 
+                    for j in range(n)] for i in range(n)]
 
     return problem_set
 
@@ -258,7 +262,7 @@ def convertToInts(problem):
         '''
     n = len(problem)
     problem_set = [[int(list(problem[i][j])[0]) if len(problem[i][j]) == 1
-                                                             else '.' for j in range(n)] for i in range(n)]
+                    else '.' for j in range(n)] for i in range(n)]
 
     return problem_set
 
